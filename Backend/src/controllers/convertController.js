@@ -12,7 +12,6 @@ const ConvertPdtToWord = async (req, res)=>{
 
         const filePath = req.file.path;
         const pdfBuffer = fs.readFileSync(filePath);
-        
         const data = await pdfParse(pdfBuffer);
 
         res.status(200).json({
@@ -21,6 +20,7 @@ const ConvertPdtToWord = async (req, res)=>{
         })
 
     }catch(err){
+        console.log(err.message)
         res.status(500).json({
             success: "false",
             message: "Error extracting text from PDF",
