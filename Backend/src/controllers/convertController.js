@@ -1,5 +1,6 @@
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
+const {Document, Packer, Paragraph, TextRun} = require("docx");
 
 const ConvertPdtToWord = async (req, res)=>{
     try{
@@ -13,11 +14,27 @@ const ConvertPdtToWord = async (req, res)=>{
         const filePath = req.file.path;
         const pdfBuffer = fs.readFileSync(filePath);
         const data = await pdfParse(pdfBuffer);
+        const paragraphs = data.text.split("\n").filter((line)=> line.trim()!=="").map((line)=>{
+            return new Paragraph({
+                children: [
+                    new TextRun(line),
+                ],
+            });
+        });
+        const doc = new Document({
+            sections:[
+                {
+                    properties: {},
+                    children: paragraphs,
+                },
+            ],  
+        });
 
-        res.status(200).json({
-            success: true,
-            extractedText: data.text
-        })
+        const buffer = await Packer.toBuffer(doc);
+        const outputPath = `src/converted/${Date.now()}.docx`;
+        fs.writeFileSync(outputPath, buffer);
+
+        res.download(outputPath);
 
     }catch(err){
         console.log(err.message)
