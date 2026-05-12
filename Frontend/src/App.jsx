@@ -45,12 +45,19 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">PDF To Word Converter</h1>
-        <input type="file" accept="pdf" onChange={handleFileChange} className="w-full border border-gray-300 rounded-lg p-3 mb-4"/>
-        {selectedFile && (<p className="text-sm text-gray-600 mb-4">Selected File : {selectedFile.name}</p>)}
-        <button onClick={handleConvert} disabled={loading} className="w-full bg-black text-white py-3 rounded-lg hover: bg-gray-800 transition duration disabled: bg-gray-400">
+    <div className="min-h-screen bg-linear-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center px-4">
+      <div className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-3xl p-8 w-full max-w-md">
+        <h1 className="text-4xl font-bold text-white text-center mb-2">PDF To Word</h1>
+        <p className="text-gray-300 text-center mb-8">Convert your PDF files into DOCX easily</p>
+        <label className="border-2 border-dashed border-gray-400 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer hover: border-white transition duration-300">
+        <input type="file" accept=".pdf" onChange={handleFileChange} className="hidden"/>
+        <p className="text-white text-lg font-medium">Click to upload PDF</p>
+        <p className="text-gray-400 text-sm mt-2">Only PDF files allowed</p>
+        </label>
+        {selectedFile && (<div className="mt-4 bg-white/10 p-3 rounded-xl">
+          <p className="text-green-400 text-sm"> Selected: {selectedFile.name}</p>
+        </div>)}
+        <button onClick={handleConvert} disabled={loading} className="w-full mt-6 bg-white text-black font-semibold py-3 rounded-2xl hover:bg-gray-200 transition duration-300 disabled:opacity-50">
           {loading ? "Converting...." : "Converted to Word"}
         </button>
       </div>
