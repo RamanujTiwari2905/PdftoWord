@@ -49,7 +49,7 @@ function App() {
       <div className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-3xl p-8 w-full max-w-md">
         <h1 className="text-4xl font-bold text-white text-center mb-2">PDF To Word</h1>
         <p className="text-gray-300 text-center mb-8">Convert your PDF files into DOCX easily</p>
-        <label className="border-2 border-dashed border-gray-400 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer hover: border-white transition duration-300">
+        <label className="border-2 border-dashed border-gray-400 rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer hover: transition duration-300">
         <input type="file" accept=".pdf" onChange={handleFileChange} className="hidden"/>
         <p className="text-white text-lg font-medium">Click to upload PDF</p>
         <p className="text-gray-400 text-sm mt-2">Only PDF files allowed</p>
